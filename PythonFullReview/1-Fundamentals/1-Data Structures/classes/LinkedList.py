@@ -1,4 +1,7 @@
-from .Node import Node
+if __name__ == "__main__":
+    from Node import Node
+else:
+    from .Node import Node
 
 class LinkedList():
     def __init__(self, _root=None):
@@ -48,6 +51,11 @@ class LinkedList():
                 return
             prev_node = node
             node = node.next_node
+    
+    def clear(self):
+        self.__init__()
+        return self
+        
 
 def practice_linked_list():
     print("Practicing LinkedList function calls")
@@ -68,3 +76,8 @@ def practice_linked_list():
     print(linked_list.find(9))
     linked_list.remove(10)
     print(linked_list.size, linked_list)
+    linked_list.clear()
+    print(linked_list.size, linked_list)
+
+if __name__ == "__main__":
+    practice_linked_list()

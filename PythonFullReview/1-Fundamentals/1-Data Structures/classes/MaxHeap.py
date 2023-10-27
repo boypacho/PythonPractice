@@ -9,7 +9,7 @@ class MaxHeap():
 
     def peek(self):
         if len(self._heap) > 0:
-            return self._heap[len(self._heap)-1]
+            return self._heap[0]
         else:
             return None
 
@@ -26,27 +26,31 @@ class MaxHeap():
         elif len(self._heap) == 2:
             popped = self._heap.pop()
         return popped
+    
+    def clear(self):
+        self.__init__()
+        return self._heap
 
     def __trickle_up(self, index):
-        parent = index//2
         if index < 1:
             return
-        elif self._heap[index] > self._heap[parent]:
-            self.__swap(index, parent)
-            self.__trickle_up(parent)
+        parentIdx = index//2
+        if self._heap[index] > self._heap[parentIdx]:
+            self.__swap(index, parentIdx)
+            self.__trickle_up(parentIdx)
 
     def __trickle_down(self, index):
-        left = index*2
-        right = index*2+1
-        largest = index
+        leftIdx = index*2
+        rightIdx = index*2+1
+        largestIdx = index
 
-        if left < len(self._heap) and self._heap[left] > self._heap[largest]:
-            largest = left
-        if right < len(self._heap) and self._heap[right] > self._heap[largest]:
-            largest = right
-        if largest != index:
-            self.__swap(index, largest)
-            self.__trickle_down(largest)
+        if leftIdx < len(self._heap) and self._heap[leftIdx] > self._heap[largestIdx]:
+            largestIdx = leftIdx
+        if rightIdx < len(self._heap) and self._heap[rightIdx] > self._heap[largestIdx]:
+            largestIdx = rightIdx
+        if largestIdx != index:
+            self.__swap(index, largestIdx)
+            self.__trickle_down(largestIdx)
 
     def __swap(self, i, j):
         self._heap[i], self._heap[j] = self._heap[j], self._heap[i]
@@ -60,3 +64,21 @@ def practice_max_heap():
     print(max_heap.pop())
     print(max_heap)
     print(max_heap.peek())
+    print(max_heap.pop())
+    print(max_heap.pop())
+    print(max_heap)
+    print(max_heap.peek())
+    max_heap.push(5)
+    max_heap.push(15)
+    max_heap.push(0)
+    print(max_heap)
+    print(max_heap.pop())
+    print(max_heap)
+    print(max_heap.pop())
+    print(max_heap)
+    print(max_heap.peek())
+    print(max_heap)
+    print(max_heap.clear())
+
+if __name__ == "__main__":
+    practice_max_heap()
